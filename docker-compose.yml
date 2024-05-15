@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  # Postgres service
+  postgres:
+    image: postgres
+    container_name: securesail_postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+
+  # Redis Stack service
+  redis-stack:
+    container_name: securesail_redis
+    image: redis/redis-stack:latest  # Use redis-stack image
+    ports:
+      - "6379:6379"  # Redis port
+      - "8001:8001" # RedisInsight port (optional)
+    volumes:
+      - redis-store:/data
+
+volumes:
+  # Persistent volume for MongoDB data
+  mongo-store: { }
+  # Persistent volume for Redis data
+  redis-store: { }

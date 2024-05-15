@@ -1,0 +1,106 @@
+server:
+  port: 9000
+
+logging:
+  level:
+    org.springframework.security: trace
+    org.springframework.data.jpa: trace
+
+spring:
+  data:
+    redis:
+      host: ${REDIS_HOST_URL}
+      port: ${REDIS_PORT}
+  application:
+    name: AmaliSecureSail
+
+  #  security:
+  #    user:
+  #      firstName: admin
+  #      password: admin
+  #    oauth2:
+  #      authorizationserver:
+  #        client:
+  #          oidc-client:
+  #            registration:
+  #              client-id: ${CLIENT_ID}
+  #              client-secret: ${CLIENT_SECRET}
+  #              client-firstName: AmaliSecureSail
+  #              client-authentication-methods:
+  #                - client_secret_basic
+  #              redirect-uris:
+  #                - ${REDIRECT_URI}
+  #              post-logout-redirect-uris:
+  #                - ${REDIRECT_URI}
+  #              scopes:
+  #                - openid
+  #                - profile
+  #                - personalEmail
+  #                - address
+  #                - phone
+  #                - offline_access
+  #                - groups
+  #            require-authorization-consent: true
+
+  main:
+    web-application-type: servlet
+
+  datasource:
+    url: ${POSTGRES_URL}
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+
+  mail:
+    host: ${EMAIL_HOST}
+    port: ${EMAIL_PORT}
+    username: ${EMAIL_HOST_USER}
+    password: ${EMAIL_HOST_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enabled: true
+            required: true
+          auth: true
+
+
+#management:
+#  server:
+#    port: 9001
+#  endpoints:
+#    web:
+#      exposure:
+#        include: *
+springdoc:
+  api-docs:
+    path: /api/v1/docs
+    title: AmaliSecureSail
+    description: Open Api Documentation for AmaliSecureSail
+    enabled: true
+    security:
+      enabled: false
+#      type: apiKey
+#      in: header
+#      firstName: Authorization
+#      description: Enter the token
+#  swagger-ui:
+#    path: /swagger-ui
+#    title: AmaliSecureSail
+#    description: Open Api Documentation for AmaliSecureSail
+#    version: 1.0.0
+#    enabled: true
+#    security:
+#      enabled: false
+#      type: apiKey
+#      in: header
+#      firstName: Authorization
+#      description: Enter the token
